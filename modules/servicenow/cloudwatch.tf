@@ -11,21 +11,12 @@ data "aws_iam_policy_document" "servicenow" {
       "logs:PutLogEvents",
     ]
 
-    resources = [
-      "${aws_cloudwatch_log_group.servicenow.arn}:*",
-      "${aws_cloudwatch_log_group.servicenow.arn}:log-stream:*"
-    ]
-
+    resources = "${aws_cloudwatch_log_group.servicenow.arn}:*"
     principals {
       identifiers = ["events.amazonaws.com", "delivery.logs.amazonaws.com"]
       type        = "Service"
     }
 
-    condition {
-      test     = "ArnEquals"
-      values   = [aws_cloudwatch_event_rule.securityhub.arn]
-      variable = "aws:SourceArn"
-    }
   }
 }
 
