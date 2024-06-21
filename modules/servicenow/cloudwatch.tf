@@ -11,7 +11,7 @@ data "aws_iam_policy_document" "servicenow" {
       "logs:PutLogEvents",
     ]
 
-    resources = "${aws_cloudwatch_log_group.servicenow.arn}:*"
+    resources = ["${aws_cloudwatch_log_group.servicenow.arn}:*"]
     principals {
       identifiers = ["events.amazonaws.com", "delivery.logs.amazonaws.com"]
       type        = "Service"
